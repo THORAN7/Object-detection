@@ -3,3 +3,4 @@ Pillow
 torch
 torchvision
 git+https://github.com/ultralytics/yolov5.git
+pip install -r requirements.txt
