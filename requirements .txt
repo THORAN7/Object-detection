@@ -2,10 +2,9 @@ streamlit
 Pillow
 torch
 torchvision
+ultralytics
 git+https://github.com/ultralytics/yolov5.git
 streamlit>=1.28.0
 ultralytics>=8.0.0
 opencv-python-headless>=4.6.0  # ← Use HEADLESS version (no GUI support)
 Pillow>=9.0.0
-pip install ultralytics
-pip show ultralytics
