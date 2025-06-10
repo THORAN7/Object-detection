@@ -1,3 +1,9 @@
+import sys
+import streamlit as st
+
+st.write("Python version:", sys.version)
+
+
 import streamlit as st
 from ultralytics import YOLO
 import numpy as np
