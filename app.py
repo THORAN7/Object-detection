@@ -1,29 +1,26 @@
 import streamlit as st
-from PIL import Image
-import torch
-import tempfile
+from ultralytics import YOLO
+import numpy as np
+from PIL import Image  # Use Pillow instead of OpenCV for image loading
 
-# Load YOLOv5 model
-@st.cache_resource
-def load_model():
-    model = torch.hub.load('ultralytics/yolov5', 'yolov5s', force_reload=True)
-    return model
+st.title("YOLOv8 Object Detection")
 
-model = load_model()
+# Load YOLOv8 model
+model = YOLO("yolov8n.pt")
 
-st.title("YOLOv5 Object Detection")
-uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
-
+# Image uploader
+uploaded_file = st.file_uploader("Upload an image...", type=["jpg", "png", "jpeg"])
 if uploaded_file:
-    img = Image.open(uploaded_file).convert("RGB")
-    st.image(img, caption="Uploaded Image", use_column_width=True)
+    # Read image with Pillow (no OpenCV)
+    image = Image.open(uploaded_file)
+    image_np = np.array(image)  # Convert to numpy array
 
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as tmp:
-        img.save(tmp.name)
-        results = model(tmp.name)
+    # Run YOLOv8 inference
+    results = model(image_np)
 
-    results.render()
-    st.image(Image.fromarray(results.ims[0]), caption="Detected Objects", use_column_width=True)
-
-    st.subheader("Detection Results")
-    st.dataframe(results.pandas().xyxy[0])
+    # Display results
+    st.image(
+        results[0].plot(),  # Still uses OpenCV internally, but HEADLESS works
+        caption="Detected Objects",
+        use_column_width=True
+    )
