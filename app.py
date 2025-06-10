@@ -2,11 +2,6 @@ import streamlit as st
 from ultralytics import YOLO
 import numpy as np
 from PIL import Image  # Use Pillow instead of OpenCV for image loading
-streamlit>=1.28.0
-ultralytics>=8.0.0
-opencv-python-headless>=4.6.0  # ← Use HEADLESS version (no GUI support)
-Pillow>=9.0.0
-st.title("YOLOv8 Object Detection")
 
 # Load YOLOv8 model
 model = YOLO("yolov8n.pt")
