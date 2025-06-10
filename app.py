@@ -1,30 +1,28 @@
-import sys
-import streamlit as st
-
-st.write("Python version:", sys.version)
-
-
 import streamlit as st
 from ultralytics import YOLO
+import cv2
 import numpy as np
-from PIL import Image  # Use Pillow instead of OpenCV for image loading
+from PIL import Image
+import tempfile
 
-# Load YOLOv8 model
-model = YOLO("yolov8n")
+# Load a YOLO model (you can replace this with your own .pt file)
+model = YOLO("yolov8n.pt")  # Downloaded automatically if not found
 
-# Image uploader
-uploaded_file = st.file_uploader("Upload an image...", type=["jpg", "png", "jpeg"])
+st.title("Object Detection with YOLOv8")
+st.markdown("Upload an image and detect objects using YOLOv8")
+
+uploaded_file = st.file_uploader("Upload Image", type=["jpg", "jpeg", "png"])
+
 if uploaded_file:
-    # Read image with Pillow (no OpenCV)
-    image = Image.open(uploaded_file)
-    image_np = np.array(image)  # Convert to numpy array
+    # Convert uploaded file to OpenCV format
+    file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+    image = cv2.imdecode(file_bytes, 1)
 
-    # Run YOLOv8 inference
-    results = model(image_np)
+    # Run YOLO inference
+    results = model(image)
 
-    # Display results
-    st.image(
-        results[0].plot(),  # Still uses OpenCV internally, but HEADLESS works
-        caption="Detected Objects",
-        use_column_width=True
-    )
+    # Get rendered image (with boxes)
+    rendered = results[0].plot()
+
+    # Display
+    st.image(rendered, caption="Detected Objects", channels="BGR")
