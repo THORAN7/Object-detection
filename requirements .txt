@@ -1,11 +1,6 @@
-streamlit
-Pillow
-torch
-torchvision
-ultralytics
-opencv-python
-git+https://github.com/ultralytics/yolov5.git
 streamlit>=1.28.0
 ultralytics>=8.0.0
-opencv-python-headless>=4.6.0  # ← Use HEADLESS version (no GUI support)
+torch
+torchvision
+opencv-python-headless>=4.6.0  # Avoids GUI issues on cloud
 Pillow>=9.0.0
