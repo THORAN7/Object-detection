@@ -186,6 +186,71 @@ def inject_styles() -> None:
                 50% { transform: translate3d(24px, -18px, 0) scale(1.07); }
             }
 
+            @keyframes bannerSlideIn {
+                from { opacity: 0; transform: translateY(-30px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            @keyframes gradientShift {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+            }
+
+            @keyframes pulseGlow {
+                0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+                50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); }
+            }
+
+            .banner-container {
+                animation: bannerSlideIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+                margin-bottom: 1.5rem;
+            }
+
+            .banner {
+                background: linear-gradient(
+                    135deg,
+                    rgba(30, 58, 138, 0.4),
+                    rgba(79, 39, 131, 0.3),
+                    rgba(14, 165, 233, 0.25)
+                );
+                background-size: 300% 300%;
+                border: 1px solid rgba(148, 163, 184, 0.2);
+                border-radius: 20px;
+                padding: 2.5rem 2rem;
+                backdrop-filter: blur(20px);
+                box-shadow: 0 8px 32px rgba(59, 130, 246, 0.15);
+                animation: pulseGlow 3s ease-in-out infinite;
+            }
+
+            .banner-title {
+                font-size: 2.5rem;
+                font-weight: 800;
+                margin: 0 0 0.5rem 0;
+                background: linear-gradient(90deg, #60a5fa, #818cf8, #c084fc);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                animation: fadeUp 1s ease-out 0.2s both;
+            }
+
+            .banner-subtitle {
+                font-size: 1rem;
+                color: #cbd5e1;
+                margin: 0;
+                animation: fadeUp 1s ease-out 0.4s both;
+            }
+
+            .banner-accent {
+                display: inline-block;
+                width: 3px;
+                height: 24px;
+                background: linear-gradient(180deg, #3b82f6, #ec4899);
+                border-radius: 2px;
+                margin-right: 0.75rem;
+                animation: fadeUp 1s ease-out 0.1s both;
+            }
+
             .stButton > button {
                 border-radius: 999px;
                 border: 0;
@@ -213,23 +278,40 @@ def image_to_array(image: Image.Image) -> np.ndarray:
     return np.asarray(fixed)
 
 
+def display_banner() -> None:
+    """Display animated startup banner with modern effects"""
+    st.markdown(
+        """
+        <div class="banner-container">
+            <div class="banner">
+                <div style="display: flex; align-items: center;">
+                    <div class="banner-accent"></div>
+                    <div class="banner-title">Object Detection Studio</div>
+                </div>
+                <p class="banner-subtitle">✨ Powered by YOLOv8 • Professional-grade AI object detection</p>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 inject_styles()
+display_banner()
 model = load_model()
 
 st.markdown(
     """
     <div class="hero-card">
-        <div class="section-label">Object Detection Studio</div>
-        <h1 class="hero-title">Fast, polished YOLOv8 detections with a modern UI.</h1>
-        <p class="hero-subtitle">
-            Upload an image, tune the detector from the sidebar, and inspect results in a premium glassmorphism workspace
-            with ambient motion and cleaner visuals.
+        <h2 class="hero-title" style="font-size: 1.8rem; margin-top: 0;">How it works</h2>
+        <p class="hero-subtitle" style="font-size: 0.95rem;">
+            Upload any image to instantly detect objects using advanced AI. Our glassmorphism interface provides
+            real-time feedback with adjustable confidence levels and side-by-side comparisons.
         </p>
         <div class="pill-row">
-            <span class="pill">✨ Animated ambient background</span>
-            <span class="pill">⚡ YOLOv8 inference</span>
-            <span class="pill">🎛️ Adjustable confidence and IoU</span>
-            <span class="pill">🖼️ Side-by-side analysis</span>
+            <span class="pill">🚀 Lightning-fast inference</span>
+            <span class="pill">🎯 High accuracy detection</span>
+            <span class="pill">⚙️ Fully customizable</span>
         </div>
     </div>
     """,
