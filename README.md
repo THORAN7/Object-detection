@@ -1,5 +1,13 @@
 # 🎯 Object Detection Studio
 
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&height=220&color=0:0f172a,30:1d4ed8,70:6d28d9,100:06b6d4&text=Object%20Detection%20Studio&fontAlignY=38&fontSize=42&fontColor=e2e8f0&desc=YOLOv8%20%7C%20Streamlit%20%7C%20Modern%20AI%20UI&descAlignY=60&descSize=16&animation=fadeIn" alt="Object Detection Studio animated banner" />
+</p>
+
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=22&pause=900&color=93C5FD&center=true&vCenter=true&width=900&lines=Real-time+Object+Detection+with+YOLOv8;Polished+Glassmorphism+Interface;Upload+Image+%E2%86%92+Detect+%E2%86%92+Analyze+in+Seconds" alt="Animated typing subtitle" />
+</p>
+
 [![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue?style=flat-square&logo=python)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.0%2B-red?style=flat-square&logo=streamlit)](https://streamlit.io/)
 [![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-green?style=flat-square)](https://github.com/ultralytics/ultralytics)
