@@ -99,7 +99,7 @@ Object-detection/
 └── 🔧 .venv/                Virtual environment
 ```
 
----
+----
 
 ## ⚙️ Configuration
 
