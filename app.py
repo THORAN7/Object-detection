@@ -412,4 +412,3 @@ else:
     )
 
 st.caption("Built with Streamlit and YOLOv8 • Ambient UI refresh")
-
